@@ -18,7 +18,7 @@ def get_last_values(data, count_value):
 def get_formated_data(data):
     formated_data = []
     for row in data:
-        data = datetime.strptime(row['date'], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
+        date = datetime.strptime(row['date'], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
         description = row['description']
         sender = row['from'].split()
         if sender[0] != 'Счет':
@@ -45,8 +45,13 @@ def get_formated_data(data):
             recipient_bill = f'**{recipient_bill[-4:]}'
             recipient_info = ''.join(recipient[0])
 
-        amount = row['amount']
-        name = row['name']
-
+        amount = row["amount"]
+        name = row["name"]
+        formated_data.append(f"""
+{date} {description}
+{from_info} {from_info} -> {recipient_info} {recipient_bill}
+{amount} {name}
+""")
+    print(formated_data)
 
 
