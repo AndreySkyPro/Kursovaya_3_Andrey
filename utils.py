@@ -45,13 +45,14 @@ def get_formated_data(data):
             recipient_bill = f'**{recipient_bill[-4:]}'
             recipient_info = ''.join(recipient[0])
 
-        amount = row["amount"]
-        name = row["name"]
+        amount = row['operationAmount']['amount']
+        name = row['operationAmount']['currency']['name']
+
         formated_data.append(f"""
 {date} {description}
-{from_info} {from_info} -> {recipient_info} {recipient_bill}
+{from_info} {from_bill} -> {recipient_info} {recipient_bill}
 {amount} {name}
 """)
-    print(formated_data)
+    return formated_data
 
 
