@@ -51,8 +51,5 @@ def get_formated_data(data):
         formated_data.append(f"""
 {date} {description}
 {from_info} {from_bill} -> {recipient_info} {recipient_bill}
-{amount} {name}
-""")
+{amount} {name}""")
     return formated_data
-
-
