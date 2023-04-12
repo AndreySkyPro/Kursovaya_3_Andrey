@@ -8,13 +8,16 @@ def test_get_data():
     data = get_data()
     assert isinstance(data, list)
 
+
 def test_get_filtred_data():
     data = right_data()
     assert len(get_filtred_data(data)) == 76
 
+
 def test_get_last_values():
     data = get_last_values(right_data(), 2)
     assert [x['date'] for x in data] == ['2019-12-07T06:17:14.634890', '2019-11-19T09:22:25.899614']
+
 
 def test_get_formated_data():
     data = get_formated_data(right_data()[:3])

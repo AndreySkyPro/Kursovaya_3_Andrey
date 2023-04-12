@@ -1,21 +1,45 @@
 import json
 from datetime import datetime
 
+
 def get_data():
+    """
+    Функция для чтения файла json
+    :return: Возвращает данные из файла в формате list
+    """
     with open('operations.json', 'r', encoding='utf-8') as file:
         data = json.load(file)
     return data
 
+
 def get_filtred_data(data):
+    """
+    Функция для сортировки полученных данных, получает из списка данные со статусом EXECUTED и имеющие счет отправления
+    :param data: Данные полученные из файла json
+    :return: Отсортированный список
+    """
     data = [x for x in data if 'state' in x and x['state'] == 'EXECUTED']
     data = [x for x in data if 'from' in x]
     return data
 
+
 def get_last_values(data, count_value):
+    """
+    Фунция для сортировки по ключевому параметру date от более новых к старым
+    :param data: Отсортированный согласно условий список (EXECUTED and from)
+    :param count_value: значение в формате int для получения требуемого количества значений в списке операций
+    :return: Отсортированный по датам список определенной длинны
+    """
     data = sorted(data, key=lambda x: x['date'], reverse=True)
     return data[:count_value]
 
+
 def get_formated_data(data):
+    """
+    Функция для вывода данных в требуемом формате, преобразует формат даты, шифрует данные для вывода согласно ТЗ
+    :param data: Отсортированный по датам список определенной длинны
+    :return: Список значений для вывода
+    """
     formated_data = []
     for row in data:
         date = datetime.strptime(row['date'], "%Y-%m-%dT%H:%M:%S.%f").strftime("%d.%m.%Y")
