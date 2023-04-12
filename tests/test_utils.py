@@ -1,6 +1,6 @@
 import pytest
 
-from testingdata import right_data
+from testing_data import right_data
 from utils import get_data, get_filtred_data, get_last_values, get_formated_data
 
 
